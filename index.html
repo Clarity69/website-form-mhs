@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Data</title>
+</head>
+<body>
+    <!-- <h1>Data Mahasiswa</h1> -->
+    <div class="form-card">
+        <h2>[ DATA_INPUT ]</h2>
+        <form class="grid-form">
+            <div class="form-grp">
+                <label>Nama</label>
+                <input type="text"placeholder="Input Nama" required id="nama">
+            </div>
+            <div class="form-grp">
+                <label>NIM</label>
+                <input type="text" required placeholder="Input Nim" id="nim">
+            </div>
+            <div class="form-grp">
+                <label>Alamat</label>
+                <input type="text" required placeholder="Input Alamat" id="alamat">
+            </div>
+            <div class="form-grp">
+                <label>Tanggal Lahir</label>
+                <input type="date" required id="tgl">
+            </div>
+            <div class="form-grp">
+                <label>Password</label>
+                <input type="password" required placeholder="Input Password" id="password">
+            </div>
+            <div class="form-grp">
+                <label>Jenis Kelamin</label>
+                <div class="radio-grp">
+                    <input type="radio" name="gender" id="Pria" value="pria">
+                    <label for="Pria">Pria</label>
+
+                    <input type="radio" name="gender" id="wanita" value="wanita">
+                    <label for="wanita">Wanita</label>
+
+                    <input type="radio" name="gender" id="heli" value="heli">
+                    <label for="heli">helikopter</label>
+                </div>
+            </div>
+
+            <div class="btn-grp">
+                <button type="submit" class="submit" id="submit-btn" onclick="submitData()">Submit</button>
+                <button type="reset" class="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="table-card">
+        <div class="table-header-action">
+            <h2 class="table-title">[ DATA_RECORDS ]</h2>
+            <div class="action-wrapper">
+                <button class="export-btn" onclick="exportToCSV()">
+                    <span></span> EXPORT_DATA
+                </button>
+                <input type="search" id="data-search" placeholder="Cari NIM atau Nama...">
+            </div>
+        </div>
+    
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>NIM</th>
+                        <th>Nama</th>
+                        <th>Alamat</th>
+                        <th>Tanggal_Lahir</th>
+                        <th>Jenis_Kelamin</th>
+                        <th>Password</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <!-- Data akan di-render otomatis oleh JS -->
+                </tbody>
+            </table>
+        </div>
+    
+        <!-- Pagination di bawah tabel -->
+        <div class="pagination">
+            <div class="pagination-info" id="pagination-info"></div>
+            <div class="pagination-controls" id="pagination-numbers"></div>
+        </div>
+    </div>
+</body>
+<script src="script.js" defer></script>
+</html>
