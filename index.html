@@ -10,7 +10,7 @@
     <!-- <h1>Data Mahasiswa</h1> -->
     <div class="form-card">
         <h2>[ DATA_INPUT ]</h2>
-        <form class="grid-form">
+        <form class="grid-form" id="grid-form">
             <div class="form-grp">
                 <label>Nama</label>
                 <input type="text"placeholder="Input Nama" required id="nama">
@@ -57,7 +57,7 @@
             <h2 class="table-title">[ DATA_RECORDS ]</h2>
             <div class="action-wrapper">
                 <button class="export-btn" onclick="exportToCSV()">
-                    <span></span> EXPORT_DATA
+                    <span>EXPORT_DATA</span> 
                 </button>
                 <input type="search" id="data-search" placeholder="Cari NIM atau Nama...">
             </div>
@@ -78,7 +78,6 @@
                     </tr>
                 </thead>
                 <tbody id="table-body">
-                    <!-- Data akan di-render otomatis oleh JS -->
                 </tbody>
             </table>
         </div>
