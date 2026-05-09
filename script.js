@@ -57,10 +57,10 @@ function renderTable(data, startIdx) {
                 <span class="pw-text" data-opened="false" data-pw="${mhs.pw}">••••••••</span>            
             </td>
             <td class="action-btns">
-                <button class="edit-btn" onclick="editRow('${mhs.nim}')">
+                <button class="edit-btn" onclick="editData('${mhs.nim}')">
                     <img src="assets/edit.png" width="20">
                 </button>
-                <button class="delete-btn" onclick="deleteRow('${mhs.nim}')">
+                <button class="delete-btn" onclick="deleteData('${mhs.nim}')">
                     <img src="assets/trash.png" width="20">
                 </button>
             </td>
@@ -74,18 +74,33 @@ form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const payload = {
-        nim : document.getElementById("nim").value,
-        nama : document.getElementById("nama").value,
-        alamat : document.getElementById("alamat").value,
-        tgl : document.getElementById("tgl").value,
-        password : document.getElementById("pw").value,
-        gender : document.querySelector('input[name="gender"]:checked')?.value || "-"
+        nim: document.getElementById("nim").value,
+        nama: document.getElementById("nama").value,
+        alamat: document.getElementById("alamat").value,
+        tgl: document.getElementById("tgl").value,
+        password: document.getElementById("pw").value,
+        gender: document.querySelector('input[name="gender"]:checked')?.value || "-"
     };
 
-    const {error} = await _supabase.from('data_mhs').insert([payload]);
+    let result;
+    
+    if (form.dataset.mode === "edit") {
+        // LOGIKA UPDATE
+        result = await _supabase
+            .from('data_mhs')
+            .update(payload)
+            .eq('nim', form.dataset.targetNim);
+            
+        // Kembalikan form ke mode tambah
+        form.dataset.mode = "add";
+        form.querySelector('button[type="submit"]').innerText = "SUBMIT_DATA";
+    } else {
+        // LOGIKA INSERT BARU
+        result = await _supabase.from('data_mhs').insert([payload]);
+    }
 
-    if(error){
-        alert("gagal simpan: "+ error.message);
+    if (result.error) {
+        alert("Gagal memproses data: " + result.error.message);
     } else {
         form.reset();
         fetchData();
@@ -123,6 +138,90 @@ function pagination(totalCount) {
 }
 
 // EDIT DELETE
+async function deleteData(nim) {
+    const konfirmasi = confirm(`Apakah Yakin Ingin Mengahpus Data dengan NIM : ${nim}`);
+    
+    if(konfirmasi){
+        const {error} = await _supabase
+        .from('data_mhs')
+        .delete()
+        .eq('nim', nim);
 
+        if(error){
+            alert("Gagal Menghapus:" + error.message);
+        } else {
+            fetchData();
+        }
+    }
+}
+
+async function editData(nim) {
+    const {data, error} = await _supabase
+    .from('data_mhs')
+    .select('*')
+    .eq('nim', nim)
+    .single();
+
+        if(error){
+            alert("Gagal mengambil data untuk edit: "+ error.message);
+            return;
+        }
+
+    document.getElementById("nim").value = data.nim;
+    document.getElementById("nama").value = data.nama; 
+    document.getElementById("alamat").value = data.alamat;
+    document.getElementById("tgl").value = data.tgl;
+    document.getElementById("pw").value = data.password;
+
+    const genderRadio = document.getElementsByName("gender");
+    genderRadio.forEach(radio => {
+        if(radio.value === data.gender) radio.checked = true;
+    });
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.innerText = "UPDATE_DATA";
+
+    form.dataset.mode = "edit";
+    form.dataset.targetNim = nim;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// EXPORT
+async function exportCSV() {
+    const {data, error} = await _supabase
+    .from('data_mhs')
+    .select('nim, nama, alamat, tgl, gender');
+
+    if(error){
+        alert("Gagal Mengabil Data:" + error.message);
+        return;
+    }
+
+    const headers = ["nim", "nama", "alamat", "tgl_lahir", "gender"];
+
+    const csvRows = [
+        headers.join(','),
+        ...data.map(row => [
+            `"${row.nim}"`,      
+            `"${row.nama}"`,
+            `"${row.alamat}"`,
+            `"${row.tgl}"`,
+            `"${row.gender}"`
+        ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvRows], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', `data_mahasiswa_${new Date().getTime()}.csv`);
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
 
 fetchData();
