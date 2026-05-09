@@ -248,9 +248,9 @@ tr:hover td {
 
 /* PAGINATION */
 .pagination {
+    justify-content: space-between;
     display: flex;
     align-items: center;
-    justify-content: center;
     margin-top: 20px;
     padding-top: 20px;
 }
@@ -260,6 +260,7 @@ tr:hover td {
     text-transform: uppercase;
     color: var(--mauve);
     font-size: 12px;
+    padding-right: 10px;
 }
 
 .pagination-controls {

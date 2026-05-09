@@ -1,7 +1,7 @@
 // config API database
+const DB_URL = "https://jzytmeqcrlxrwixopnxo.supabase.co";
 const DB_KEY = "sb_publishable_cETj0RHh2XRB98XPu74AEg_SYea_WWX";
-const DB_URL = "https://jzytmeqcrlxrwixopnxo.supabase.co/rest/v1/";
-const supabase = supabase.createClient(DB_KEY, DB_URL);
+const _supabase = supabase.createClient(DB_URL, DB_KEY);
 
 // Data Input
 const tableBody = document.getElementById("table-body");
@@ -18,8 +18,8 @@ async function fetchData() {
     const end = start + rowsPerPage - 1;
 
     // Query
-    let query = supabase
-    .from('mahasiswa')
+    let query = _supabase
+    .from('data_mhs')
     .select('*', {count: 'exact'});
 
     // Filter Input
@@ -37,33 +37,33 @@ async function fetchData() {
     }
     else {
         renderTable(data, start);
-        updatePagination(count);
+        pagination(count);
     }
 }
 
 // Render Table
-function renderTable(start, startIdx){
+function renderTable(data, startIdx) { 
     tableBody.innerHTML = "";
-    data.array.forEach(mhs, index  => {
+    data.forEach((mhs, index) => {
         const row = document.createElement("tr");
         row.innerHTML = `
             <td>${startIdx + index + 1}</td>
-                <td>${mhs.nim}</td>
-                <td>${mhs.nama}</td>
-                <td>${mhs.alamat}</td>
-                <td>${mhs.tgl}</td>
-                <td><span class="badge">${mhs.gender}</span></td>
-                <td>
-                    <span class="pw-text" data-opened="false" data-pw="${mhs.password}">••••••••</span>            
-                </td>
-                <td class="action-btns">
-                    <button class="edit-btn" onclick="editRow(${realIndex})">
-                        <img class="edit-img" src="assets/edit.png"  width="20">
-                    </button>
-                    <button class="delete-btn" onclick="deleteRow(${realIndex})">
-                        <img class="delete-img" src="assets/trash.png" width="20">
-                    </button>
-                </td>
+            <td>${mhs.nim}</td>
+            <td>${mhs.nama}</td>
+            <td>${mhs.alamat}</td>
+            <td>${mhs.tgl}</td>
+            <td><span class="badge">${mhs.gender}</span></td>
+            <td>
+                <span class="pw-text" data-opened="false" data-pw="${mhs.pw}">••••••••</span>            
+            </td>
+            <td class="action-btns">
+                <button class="edit-btn" onclick="editRow('${mhs.nim}')">
+                    <img src="assets/edit.png" width="20">
+                </button>
+                <button class="delete-btn" onclick="deleteRow('${mhs.nim}')">
+                    <img src="assets/trash.png" width="20">
+                </button>
+            </td>
         `;
         tableBody.appendChild(row);
     });
@@ -77,12 +77,12 @@ form.addEventListener("submit", async (e) => {
         nim : document.getElementById("nim").value,
         nama : document.getElementById("nama").value,
         alamat : document.getElementById("alamat").value,
-        tl : document.getElementById("tl").value,
+        tgl : document.getElementById("tgl").value,
         password : document.getElementById("pw").value,
         gender : document.querySelector('input[name="gender"]:checked')?.value || "-"
     };
 
-    const {error} = await supabase.from('mahasiswa').insert([payload]);
+    const {error} = await _supabase.from('data_mhs').insert([payload]);
 
     if(error){
         alert("gagal simpan: "+ error.message);
@@ -93,3 +93,36 @@ form.addEventListener("submit", async (e) => {
 });
 
 // SEARCH, PAGINATION
+searchInput.addEventListener("input", () => {
+    currentPage = 1;
+    fetchData();
+});
+
+function pagination(totalCount) {
+    const totalPages = Math.ceil(totalCount / rowsPerPage);
+    const container = document.getElementById("pagination-numbers");
+    const info = document.getElementById("pagination-info");
+
+    if (info) {
+        info.innerHTML = `[ PAGE <span class="accent">${currentPage}</span> OF <span class="accent">${totalPages || 1}</span> ]`;
+    }
+    
+    if (container) {
+        container.innerHTML = ""; 
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement("button");
+            btn.innerText = i;
+            btn.className = `page-num ${i === currentPage ? 'active' : ''}`;
+            btn.onclick = () => {
+                currentPage = i;
+                fetchData();
+            };
+            container.appendChild(btn);
+        }
+    }
+}
+
+// EDIT DELETE
+
+
+fetchData();
