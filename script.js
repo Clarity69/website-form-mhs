@@ -52,7 +52,7 @@ function renderTable(data, startIdx) {
             <td>${mhs.nama}</td>
             <td>${mhs.alamat}</td>
             <td>${mhs.tgl}</td>
-            <td><span class="badge">${mhs.gender}</span></td>
+            <td>${mhs.gender}</td>
             <td>
                 <span class="pw-text" data-opened="false" data-pw="${mhs.pw}">••••••••</span>            
             </td>
@@ -93,7 +93,7 @@ form.addEventListener("submit", async (e) => {
             
         // Kembalikan form ke mode tambah
         form.dataset.mode = "add";
-        form.querySelector('button[type="submit"]').innerText = "SUBMIT_DATA";
+        form.querySelector('button[type="submit"]').innerText = "Submit";
     } else {
         // LOGIKA INSERT BARU
         result = await _supabase.from('data_mhs').insert([payload]);
@@ -179,7 +179,7 @@ async function editData(nim) {
     });
 
     const submitBtn = form.querySelector('button[type="submit"]');
-    submitBtn.innerText = "UPDATE_DATA";
+    submitBtn.innerText = "Update";
 
     form.dataset.mode = "edit";
     form.dataset.targetNim = nim;
@@ -223,5 +223,7 @@ async function exportCSV() {
     a.click();
     document.body.removeChild(a);
 }
+
+
 
 fetchData();

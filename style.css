@@ -1,7 +1,7 @@
 /* Import Font */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Pixelify+Sans:wght@400..700&display=swap');
 
-/* Deklarasi Warna */
+/* Deklarasi Warna/ catppuccin reference */
 :root {
     --bg-card: #181825;
     --bg-input: #1e1e2e;
@@ -305,3 +305,4 @@ tr:hover td {
 .view-btn img {
     display: block;
 }
+
