@@ -8,6 +8,7 @@ const tableBody = document.getElementById("table-body");
 const form = document.getElementById("grid-form");
 const searchInput = document.getElementById("data-search");
 
+// Setting untuk menampilkan data pagination
 let currentPage = 1;
 const rowsPerPage = 5;
 
