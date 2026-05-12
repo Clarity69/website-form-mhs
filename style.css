@@ -15,6 +15,7 @@
     --crust: #11111b;
 }
 
+/* Keseluruhan Web */
 body {
     font-family: 'JetBrains Mono', monospace;
     background-color: var(--bg-body);
