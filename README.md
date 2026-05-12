@@ -16,4 +16,4 @@ Using HTML,CSS,JS for the interface or UI/UX, while the backend using POSTGRESQL
 </div>
 
 ## screenshot
-![alt text](image-1.png)
+![alt text](image.png)
