@@ -1,4 +1,4 @@
-// config API database
+// config API database(HARDCODED)
 const DB_URL = "https://jzytmeqcrlxrwixopnxo.supabase.co";
 const DB_KEY = "sb_publishable_cETj0RHh2XRB98XPu74AEg_SYea_WWX";
 const _supabase = supabase.createClient(DB_URL, DB_KEY);
