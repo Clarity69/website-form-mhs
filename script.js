@@ -190,10 +190,14 @@ async function editData(nim) {
 
 // EXPORT
 async function exportCSV() {
+
+    // Ambil data dan urutkan nama A-Z
     const {data, error} = await _supabase
     .from('data_mhs')
-    .select('nim, nama, alamat, tgl, gender');
+    .select('nim, nama, alamat, tgl, gender')
+    .order('nama', { ascending: true });
 
+    // Jika error
     if(error){
         alert("Gagal Mengabil Data:" + error.message);
         return;
@@ -201,8 +205,10 @@ async function exportCSV() {
 
     const headers = ["nim", "nama", "alamat", "tgl_lahir", "gender"];
 
+    // Format CSV
     const csvRows = [
         headers.join(','),
+
         ...data.map(row => [
             `"${row.nim}"`,      
             `"${row.nama}"`,
@@ -210,8 +216,10 @@ async function exportCSV() {
             `"${row.tgl}"`,
             `"${row.gender}"`
         ].join(','))
+
     ].join('\n');
 
+    // Membuat file CSV
     const blob = new Blob([csvRows], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -220,6 +228,7 @@ async function exportCSV() {
     a.setAttribute('href', url);
     a.setAttribute('download', `data_mahasiswa_${new Date().getTime()}.csv`);
 
+    // Download otomatis
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
