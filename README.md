@@ -11,7 +11,7 @@ Aplikasi ini telah dideploy secara cloud dan dapat diakses secara publik melalui
 ---
 
 ## Preview
-<img src="assets/preview.jpg" alt="Preview" style="width: 100%; max-width: 600px;" />
+<img src="assets/preview.jpeg" alt="Preview" style="width: 100%; max-width: 600px;" />
 
 --- 
 ## Stack Teknologi & Arsitektur
