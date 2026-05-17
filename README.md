@@ -25,9 +25,9 @@ Proyek ini dibangun secara mandiri dengan arsitektur modern yang memisahkan *cli
   <img src="https://simpleicons.org/icons/vercel.svg" height="40" alt="vercel logo" />
 </div>
 
-**Frontend**: HTML, CSS, JS
-**Backend Cloud Database**: Supabase BaaS (Backend-as-a-Service) via Supabase JS SDK.
-**Hosting Platform**: Vercel Cloud Platform.
+**Frontend**: HTML, CSS, JS <br>
+**Backend Cloud Database**: Supabase BaaS (Backend-as-a-Service) via Supabase JS SDK.<br>
+**Hosting Platform**: Vercel Cloud Platform. 
 
 ---
 
