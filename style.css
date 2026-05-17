@@ -306,3 +306,33 @@ tr:hover td {
 .view-btn img {
     display: block;
 }
+
+/* responsive */
+@media (max-width: 600px) {
+    .grid-form {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-grp {
+        grid-column: 1;
+        width: 100%;
+        padding: 0;
+    }
+
+    #data-search {
+        grid-column: 1;
+        width: 100%;        
+    }
+
+    .submit, .reset, .export-btn {
+        flex: 1;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .action-wrapper, .pagination {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: 12px;
+    }
+}
