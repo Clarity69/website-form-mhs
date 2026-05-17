@@ -10,6 +10,10 @@ Aplikasi ini telah dideploy secara cloud dan dapat diakses secara publik melalui
 
 ---
 
+## Preview
+![assets/preview.jpeg]()
+
+--- 
 ## Stack Teknologi & Arsitektur
 Proyek ini dibangun secara mandiri dengan arsitektur modern yang memisahkan *client-side logic* dengan cloud database melalui integrasi API:
 
