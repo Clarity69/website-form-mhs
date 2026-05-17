@@ -5,8 +5,8 @@ Aplikasi manajemen data mahasiswa modern, responsif, dan dinamis yang dibangun m
 ---
 
 ## Tautan Aplikasi (Live Deployment)
-Aplikasi ini telah dideploy secara cloud dan dapat diakses secara publik melalui tautan berikut:
-👉 **https://website-form-mhs.vercel.app/** 
+Aplikasi ini telah dideploy secara cloud dan dapat diakses secara publik melalui tautan berikut: <br>
+**https://website-form-mhs.vercel.app/** 
 
 ---
 
@@ -38,5 +38,5 @@ Proyek ini mengadopsi prinsip *Separation of Concerns* (SoC) untuk mempermudah p
 ├── assets/          # Menyimpan aset gambar dan ikon aplikasi (edit, trash, dll.)
 ├── index.html       # Struktur utama aplikasi, form input, tabel, dan CDN SDK
 ├── script.js        # Logika Asynchronous CRUD, integrasi Supabase, & state management
-├── style.css        # Variabel warna Catppuccin, layouting, dan Media Queries responsif
-└── README.md        # Dokumentasi teknis proyek (File ini)
+├── style.css        # Variabel warna Catppuccin, layouting
+└── README.md        # Dokumentasi teknis proyek
