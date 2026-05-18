@@ -295,18 +295,6 @@ tr:hover td {
     font-weight: bold;
 }
 
-/* password toggle btn */
-.view-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
-
-.view-btn img {
-    display: block;
-}
-
 /* responsive */
 @media (max-width: 600px) {
     .grid-form {
